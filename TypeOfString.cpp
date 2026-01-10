@@ -1,4 +1,4 @@
-#include <iostream>
+#include "ScalarConverter.hpp"
 
 bool isFloat(std::string str)
 {
@@ -41,4 +41,13 @@ bool isDouble(std::string str)
 			return false;
 	}
 	return true;
+}
+
+type getTypeOfString(std::string str)
+{
+	if (isInt(str))
+		return INTEGER;
+	else if (isFloat(str))
+		return FLOAT;
+	else if (is)
 }

@@ -19,3 +19,11 @@ struct scalarTypes
 	double numberDouble;
 };
 
+enum type
+{
+	CHAR,
+	INTEGER,
+	DOUBLE,
+	FLOAT
+};
+
