@@ -1,5 +1,12 @@
 #pragma once
 #include <iostream>
+#include <cstdlib>
+#include <cerrno>
+#include <limits>
+#include <cmath>
+#include <iomanip>
+#include <limits.h>
+
 
 class ScalarConverter
 {
@@ -17,6 +24,7 @@ struct scalarTypes
 	int number;
 	float numberFloat;
 	double numberDouble;
+	int flag;
 };
 
 enum type
@@ -24,6 +32,17 @@ enum type
 	CHAR,
 	INTEGER,
 	DOUBLE,
-	FLOAT
+	FLOAT,
+	OTHER, 
+	OUT_OF_RANGE,
+	OVERFLOW,
+	OVERFLOW_DBL,
+	OVERFLOW_FLT,
+
 };
 
+
+
+type getTypeOfString(std::string str);
+void converter(std::string str, scalarTypes &scalar, type typ);
+void print(scalarTypes scalar);

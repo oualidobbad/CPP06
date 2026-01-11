@@ -11,14 +11,16 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
 
 void ScalarConverter::convert(std::string str)
 {
-	scalarTypes  type;
+	scalarTypes  scalar;
+	type typ;
 
-	if (std::isdigit(str[0]))
-	{
-		for (int i  = 0; i < str.length(); i++)
-		{
-			if ()
-		}
-	}
-	else if ()
+	scalar.character = 0;
+	scalar.number = 0;
+	scalar.numberDouble = 0.0;
+	scalar.numberFloat = 0.f;
+	scalar.flag = 0;
+
+	typ = getTypeOfString(str);
+	converter(str, scalar, typ);
+	print(scalar);
 }

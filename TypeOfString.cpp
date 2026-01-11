@@ -4,8 +4,10 @@ bool isFloat(std::string str)
 {
 	if (str[str.length() - 1] != 'f')
 		return false;
-	for (int i = 0; str.length() > i; i++)
+	for (long unsigned int i = 0; str.length() > i; i++)
 	{
+		if (i == 0 && str[i] == '-')
+			continue;
 		if (!std::isdigit(str[i]) && str[i] != '.' && str[i] != 'f')
 			return false;
 	}
@@ -14,8 +16,10 @@ bool isFloat(std::string str)
 
 bool isInt(std::string str)
 {
-	for (int i = 0; i < str.length(); i++)
+	for (long unsigned int i = 0; i < str.length(); i++)
 	{
+		if (i == 0 && str[i] == '-')
+			continue;
 		if (!std::isdigit(str[i]))
 			return false;
 	}
@@ -35,8 +39,10 @@ bool isChar(std::string str)
 
 bool isDouble(std::string str)
 {
-	for (int i  = 0; i < str.length(); i++)
+	for (long unsigned int i  = 0; i < str.length(); i++)
 	{
+		if (i == 0 && str[i] == '-')
+			continue;
 		if (!std::isdigit(str[i]) && str[i] != '.')
 			return false;
 	}
@@ -49,5 +55,10 @@ type getTypeOfString(std::string str)
 		return INTEGER;
 	else if (isFloat(str))
 		return FLOAT;
-	else if (is)
+	else if (isDouble(str))
+		return DOUBLE;
+	else if (isChar(str))
+		return CHAR;
+	else
+		return OTHER;
 }
