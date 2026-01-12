@@ -16,15 +16,15 @@ void convertToInt(std::string str, scalarTypes &scalar)
 
 void convertToFloat(std::string str, scalarTypes &scalar)
 {
-	std::cout << "here\n";
+	str = str.substr(0, str.length() - 1);
 	double tmp = strtod(str.c_str(),NULL);
-	if (tmp == +INFINITY || tmp == -INFINITY)
+	if (tmp == +INFINITY || tmp == -INFINITY || tmp > std::numeric_limits<float>::max() || tmp < std::numeric_limits<float>::min())
 		scalar.flag = OVERFLOW_FLT;
 	if (tmp < INT_MIN || tmp > INT_MAX)
 		scalar.flag = OVERFLOW_FLT;
     scalar.numberFloat = static_cast<float>(tmp);
-    scalar.number = static_cast<int>(scalar.numberFloat);
-    scalar.numberDouble = static_cast<double>(scalar.numberFloat);
+    scalar.number = static_cast<int>(tmp);
+    scalar.numberDouble = static_cast<double>(tmp);
     if (scalar.numberFloat <= 127 && scalar.numberFloat >= -128)
         scalar.character = static_cast<char>(scalar.numberFloat);
 }
