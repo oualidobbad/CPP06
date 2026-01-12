@@ -10,7 +10,7 @@ int main() {
 	data->test = "hello world!";
 	raw = Serializer::serialize(data);
 
-	ptr_raw = reinterpret_cast<Data *>(raw);
+	ptr_raw = (Data *)(raw);
 
 	std::cout << "================== serialize ptr_raw of raw ==================" << std::endl;
 	std::cout << "value of Data: " << raw << std::endl;
@@ -21,7 +21,7 @@ int main() {
 	data = Serializer::deserialize(raw);
 
 	std::cout << "=================== Deserialize =====================" << std::endl;
-	std::cout << "Value of Data: " << (long)data << std::endl;
+	std::cout << "Value of Data: " << (long unsigned int)data << std::endl;
 	std::cout << "data->a: " << data->a << std::endl;
 	std::cout << "data->test: " << data->test << std::endl;
 	std::cout << "=====================================================" << std::endl << std::endl;
