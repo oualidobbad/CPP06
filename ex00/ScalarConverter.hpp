@@ -33,16 +33,16 @@ enum type
 	INTEGER,
 	DOUBLE,
 	FLOAT,
-	OTHER, 
-	OUT_OF_RANGE,
-	OVERFLOW,
+	OTHER,
+	PSEUDO_LITERAL,
+	OUT_OF_RANE,
 	OVERFLOW_DBL,
 	OVERFLOW_FLT,
-
 };
 
 
 
 type getTypeOfString(std::string str);
 void converter(std::string str, scalarTypes &scalar, type typ);
-void print(scalarTypes scalar);
+void print(scalarTypes scalar, std::string &str);
+void print_inf_nan(std::string &str);

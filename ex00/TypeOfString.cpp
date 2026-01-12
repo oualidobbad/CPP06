@@ -36,7 +36,6 @@ bool isChar(std::string str)
 		return false;
 }
 
-
 bool isDouble(std::string str)
 {
 	for (long unsigned int i  = 0; i < str.length(); i++)
@@ -49,6 +48,17 @@ bool isDouble(std::string str)
 	return true;
 }
 
+bool isPseudoLiteral(std::string &str)
+{
+	if (str == "-inf" || str == "+inf")
+		return true;
+	if (str == "+inff" || str == "-inff")
+		return true;
+	if (str == "nan" || str == "nanf")
+		return true;
+	return false;
+}
+
 type getTypeOfString(std::string str)
 {
 	if (isInt(str))
@@ -59,6 +69,8 @@ type getTypeOfString(std::string str)
 		return DOUBLE;
 	else if (isChar(str))
 		return CHAR;
+	else if (isPseudoLiteral(str))
+		return PSEUDO_LITERAL;
 	else
 		return OTHER;
 }

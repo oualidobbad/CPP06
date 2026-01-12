@@ -5,8 +5,8 @@ void convertToInt(std::string str, scalarTypes &scalar)
 	errno = 0;
     long temp = strtol(str.c_str(), NULL, 0);
 	
-	if (errno || temp > std::numeric_limits<int>::max() || temp < std::numeric_limits<int>::min())
-		scalar.flag = OVERFLOW;
+	if (errno == ERANGE || temp > std::numeric_limits<int>::max() || temp < std::numeric_limits<int>::min())
+		scalar.flag = OUT_OF_RANE;
     scalar.number = static_cast<int>(temp);
     if (scalar.number <= 127 && scalar.number >= -128)
         scalar.character = static_cast<char>(scalar.number);
@@ -16,9 +16,10 @@ void convertToInt(std::string str, scalarTypes &scalar)
 
 void convertToFloat(std::string str, scalarTypes &scalar)
 {
-	str = str.substr(0, str.length() - 1);
-	double tmp = strtod(str.c_str(),NULL);
-	if (tmp == +INFINITY || tmp == -INFINITY || tmp > std::numeric_limits<float>::max() || tmp < std::numeric_limits<float>::min())
+	errno = 0;
+	float tmp = strtof(str. c_str(), NULL);
+
+	if (std::isinf(tmp) || errno == ERANGE)
 		scalar.flag = OVERFLOW_FLT;
 	if (tmp < INT_MIN || tmp > INT_MAX)
 		scalar.flag = OVERFLOW_FLT;
@@ -32,8 +33,8 @@ void convertToFloat(std::string str, scalarTypes &scalar)
 void convertToDouble(std::string str, scalarTypes &scalar)
 {
     scalar.numberDouble = strtod(str.c_str(), NULL);
-	if (scalar.numberDouble == +INFINITY || scalar.numberDouble == -INFINITY)
-		scalar.flag = OVERFLOW_DBL;
+	if (std::isinf(scalar.numberDouble) || errno == ERANGE)
+		scalar.flag = OVERFLOW_FLT;
     scalar.number = static_cast<int>(scalar.numberDouble);
     scalar.numberFloat = static_cast<float>(scalar.numberDouble); 
     if (scalar.numberDouble <= 127 && scalar.numberDouble >= -128)
@@ -64,8 +65,13 @@ void converter(std::string str, scalarTypes &scalar, type typ)
 		case CHAR:
 			convertToChar(str, scalar);
 			break;
+		case PSEUDO_LITERAL:
+			scalar.flag = PSEUDO_LITERAL;
+			break;
 		default:
+			scalar.flag = OUT_OF_RANE;
 			break;
 	}
-
 }
+
+

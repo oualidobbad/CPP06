@@ -1,14 +1,5 @@
 #include "ScalarConverter.hpp"
 
-
-void printing_type_int(scalarTypes &scalar)
-{
-	std::cout << "int: " << scalar.number << std::endl;
-	std::cout << std::fixed << std::setprecision(1);
-	std::cout << "float: " << scalar.numberFloat << "f"<< std::endl;
-	std::cout << "double: " << scalar.numberDouble << std::endl;
-}
-
 void printing_char(scalarTypes &scalar)
 {
 	if (std::isprint(scalar.character))
@@ -19,9 +10,30 @@ void printing_char(scalarTypes &scalar)
 		std::cout << "char: Non displayable"<< std::endl;
 }
 
-void print(scalarTypes scalar)
+void format_nan_inf(std::string  &str)
 {
-	if (scalar.flag == OVERFLOW)
+	if (str == "-inff" || str == "+inff" || str == "nanf")
+		str = str.substr(0, str.length() - 1);
+}
+
+
+void print_inf_nan(std::string &str)
+{
+	format_nan_inf(str);
+	std::cout << "char: impossible"  << std::endl;
+	std::cout << "int: impossible"   << std::endl;
+	std::cout << "float: " <<  str << "f"<< std::endl;
+	std::cout << "double: " << str << std::endl;
+}
+
+void print(scalarTypes scalar, std::string &str)
+{
+	if (scalar.flag == PSEUDO_LITERAL)
+	{
+		print_inf_nan(str);
+		return ;
+	}
+	if (scalar.flag == OUT_OF_RANE)
 	{
 		std::cout << "char: impossible"  << std::endl;
 		std::cout << "int: impossible"   << std::endl;
@@ -38,8 +50,11 @@ void print(scalarTypes scalar)
 		std::cout << "double: " << scalar.numberDouble << std::endl;
 		return;
 	}
-
 	printing_char(scalar);
-	printing_type_int(scalar);
+	std::cout << "int: " << scalar.number << std::endl;
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << "float: " << scalar.numberFloat << "f"<< std::endl;
+	std::cout << "double: " << scalar.numberDouble << std::endl;
 }
+
 

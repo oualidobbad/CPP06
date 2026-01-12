@@ -22,5 +22,5 @@ void ScalarConverter::convert(std::string str)
 
 	typ = getTypeOfString(str);
 	converter(str, scalar, typ);
-	print(scalar);
+	print(scalar, str);
 }
