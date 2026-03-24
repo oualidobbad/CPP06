@@ -1,22 +1,13 @@
-# CPP06
+    # CPP06
 
-## Description
-C++ module on casting, scalar conversion, serialization, and RTTI.
+    C++ Module 06: casting, scalar conversion, simple serialization, and RTTI checks.
 
-## Features
-- Convert string scalars to numeric types and inspect RTTI.
+    ## Topics
+    - Convert string scalars to char/int/float/double with edge handling.
+    - Static/dynamic casts and type identification utilities.
 
-## Technologies Used
-- C++98, Makefile.
+    ## Build & Run
+    - `make`; run `./convert <value>` to print conversions.
 
-## Installation
-- Run `make`.
-
-## Usage
-- Execute the binary with a scalar argument to see conversions.
-
-## Example
-- `./convert 42.0f` prints conversions to char/int/float/double.
-
-## Author
-- Oualid Obbad (@oualidobbad)
+    ## Author
+    Oualid Obbad (@oualidobbad)
